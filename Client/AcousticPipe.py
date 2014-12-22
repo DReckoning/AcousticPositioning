@@ -4,6 +4,9 @@ import Sync
 from SensorLocations import * 
 import matplotlib.pyplot as plt
 
+
+# This module will process a set of data. It will read from files and process the data.
+
 def run():
 
     nodeinit()
@@ -21,9 +24,8 @@ def run():
         ssyncs = f.readline()
         sensorRocks = []
         sensorSyncs = []
-
         strin = ''
-
+        
         for c in srocks:
             if (c == ','):
                 sensorRocks.append(float(strin))
@@ -165,16 +167,21 @@ def run():
             print test
     else:
         print 'Error! Using a non-developed number of sensors: ', nn
-        
+
+
+    
     posx = []
     posy = []
+    f = open('results.csv', 'w')
+    f.write('time, x, y\n')
     for pos in position:
+        line = str(pos.time) + ', ' + str(pos.x) + ', ' + str(pos.y) +'\n'
+        f.write(line)
         posx.append(pos.x)
         posy.append(pos.y)
 
     plt.scatter(posx, posy)
     plt.axis([-3, 10,-1, 5])
     plt.show()
-
 
 run()
