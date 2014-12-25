@@ -16,6 +16,9 @@ def run():
     syncs = []
     rocks = []
 
+
+
+
     # pull from file
     for n in range(nn):
         filename = 's'+str(n)+'.txt'
