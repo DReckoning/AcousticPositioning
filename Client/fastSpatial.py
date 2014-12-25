@@ -70,10 +70,10 @@ def findDelay(Nodes,x,y,h,speed):
     for node in Nodes:
         node.delay = node.TimeDist(x,y,h,speed) - zero    
 
-def findCenter(Nodes):
+def findRanges(Nodes):
     lowestX = Nodes[0].x
     highestX = Nodes[0].x
-    lowestY = Nodes[0].y 
+    lowestY = Nodes[0].y
     highestY = Nodes[0].y
     for node in Nodes:
         if node.x < lowestX:
@@ -87,6 +87,11 @@ def findCenter(Nodes):
 
         if node.y > highestY:
             highestY = node.y
+    return [lowestX,highestX,lowestY,highestY]
+
+def findCenter(Nodes):
+
+    [lowestX,highestX,lowestY,highestY] = findRanges(Nodes)
 
     centerX = (highestX+lowestX)/float(2)
     centerY = (highestY+lowestY)/float(2)

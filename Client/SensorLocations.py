@@ -4,6 +4,12 @@ Nodes = []
 
 SyncNode = []
 
+# GHANGE THIS \/
+
+speedOfSound = 333
+
+# CHANGE THIS /\
+
 def nodeinit():
     if len(Nodes) < 1:
         

@@ -116,14 +116,16 @@ def run():
 
     rocks = newrocks
 
-    SyncedRockTimes = Sync.process(Nodes,SyncNode[0],rocks,syncs,333)
+    SyncedRockTimes = Sync.process(Nodes,SyncNode[0],rocks,syncs,speedOfSound)
 
     position = []
 
     spots = len(SyncedRockTimes[0])
 
+    [lowestX,highestX,lowestY,highestY] = spatial.findRanges(Nodes)
 
     if nn == 4:
+        print 'processing 4'
         worsteSensor = []
 
         for spot in range(0,spots):
@@ -137,7 +139,7 @@ def run():
                 for j in range(0,4):
                     if j != x:
                         threeNodes.append(Nodes[j])
-                test1 = spatial.process(threeNodes,0,333,30,5)
+                test1 = spatial.process(threeNodes,0,speedOfSound,highestX,highestY)
                 if test1.err < smallestError:
                     smallestError = test1.err
                     worsteSensor[spot] = x
@@ -154,13 +156,16 @@ def run():
         plt.show()
 
     elif nn == 3:
+        print 'processing 3'
         for spot in range(0,spots):
-            Nodes[n].setDelay(SyncedRockTimes[n][spot])
-                    
-            test1 = spatial.process(threeNodes,0,333,30,5)
-                
-            if test1 < 0.1:
-                position.append(bestTest)
+
+            for n in range(0,nn):
+                Nodes[n].setDelay(SyncedRockTimes[n][spot])
+
+            test1 = spatial.process(Nodes,0,speedOfSound,highestX,highestY)
+
+            if test1.err < 0.1:
+                position.append(test1)
 
         print '\nFinal DATA'
         for test in position:
@@ -181,7 +186,7 @@ def run():
         posy.append(pos.y)
 
     plt.scatter(posx, posy)
-    plt.axis([-3, 10,-1, 5])
+    plt.axis([lowestX,highestX,lowestY,highestY])
     plt.show()
 
 run()
