@@ -57,9 +57,9 @@ def process(Nodes,SyncNode,rocks,syncs,speed):
         newData.append(newNodeData)
 
     return newData
-                
 
-    
-        
-    
-    
+
+
+
+
+
