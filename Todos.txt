@@ -10,6 +10,7 @@ Easy 30 mins
 * make the system run completely from the config system.
 * 	make the system configure the acceptable zone. (auto or manual)
 
+
 make a uniform error messaging system for
 	faulty data
 	faulty inputs
